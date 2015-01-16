@@ -3,7 +3,7 @@
 
 function numberGame() {
 
-	confirm("Let's play a game. You need to guess a number between 1 and 10.")
+	confirm("Let's play a game. You need to guess a number between 1 and 100.")
 	
 
 	var win = false;
