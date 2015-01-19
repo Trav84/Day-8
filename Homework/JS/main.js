@@ -37,12 +37,6 @@ function numberGame(value, randomNum) {
 	return score;
 }
 
-
-
-
-
-
-
 	$('.start-button').click(function(event) {
 
 		var value = $('input').val();
@@ -52,10 +46,10 @@ function numberGame(value, randomNum) {
 
 	$('.play-again').click(function(event) {
 
+		$('input').val('');
 		generatedNumber = generateNum();
 		console.log(generatedNumber);
 
 	});	
-
 	
 });
