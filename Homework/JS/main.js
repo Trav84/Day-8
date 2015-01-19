@@ -1,51 +1,38 @@
+$( document ).ready(function() {
 
+var generatedNumber = Math.ceil(Math.random() * 100);
+console.log(generatedNumber);
 
+function generateNum() {
+	var randomNum = Math.ceil(Math.random() * 100);
+	return randomNum;
+}
 
-function numberGame() {
-
-	confirm("Let's play a game. You need to guess a number between 1 and 100.")
+function numberGame(value, randomNum) {
 	
-
+	value = $('input').val();
 	var win = false;
 	var score = 0;
 
-	do {
-			console.log(score);
-			var generatedNumber = Math.ceil(Math.random() * 100);
-			console.log(generatedNumber);
-			win = false;
-			var number = prompt("Now try and guess the number I've picked! I'll tell you if your too low or too high or correct!");
-			var loopCount = 1;
+		if (isNaN(value)) {
+			throw "You did not enter a number";
+		}	
 
-			if (isNaN(number)) {
-				console.log(number);
-				throw "You did not enter a number";
-			}
+		if (value == generatedNumber) {
+			$('.win-lose-box').html('YOU WIN! YAAAAY!');
+			score++;
+			$('#score-box').html(parseInt($('#score-box').html(), 10)+1)
+		}
 
-		do {
+		else if (value > generatedNumber) {
+			$('.win-lose-box').html('Too high, guess again'); 
+			$('input').val('');
+		}
 
-			if (number == generatedNumber) {
-				confirm("You guessed right! Yaaaaaaay");
-				win = true;
-				score++;
-			}
-			else if (number > generatedNumber) {
-				confirm("Too high!");
-				loopCount++;
-				number = prompt("Guess again");
-			}
-			else {
-				confirm("Too low!");
-				loopCount++;
-				number = prompt("Guess again");
-			}
-			if(loopCount == 1){
-				score = 1000;
-			}
-
-		} while (win !== true);
-
-	} while (confirm("Would you like to play again?"));
+		else {
+			$('.win-lose-box').html('Too low, guess again');
+			$('input').val('');
+		}
 
 	return score;
 }
@@ -53,8 +40,22 @@ function numberGame() {
 
 
 
-$( document ).ready(function() {
 
-	$('#score-box').append(numberGame());
+
+
+	$('.start-button').click(function(event) {
+
+		var value = $('input').val();
+		numberGame(value, generatedNumber);
+		
+	});
+
+	$('.play-again').click(function(event) {
+
+		generatedNumber = generateNum();
+		console.log(generatedNumber);
+
+	});	
+
 	
 });
